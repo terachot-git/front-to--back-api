@@ -18,6 +18,13 @@ app.use(express.json())//for readbody
 // })
 app.use('/api',userRouter)
 app.use('/auth',authRouter)
+
+
+//Error Handling
+app.use((err,req,res,next)=>{
+    console.log(err.message)
+    res.status(err.code||500).json({message:err.message||"Something Wrong"})
+})
 const PORT = 8000
 // Start Server
 app.listen(PORT,()=>console.log(`Server is running on port http://localhost:${PORT}`))
